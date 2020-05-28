@@ -18,22 +18,13 @@ class WebService {
                     print(error.localizedDescription)
                     completion(nil) //hata varsa hicbir veri dondurme.
                 }else if let safeData = data {
-                    if let data = self.parseJSON(safeData) {
+                   if let data = try? JSONDecoder().decode(ArticleData.self, from: safeData) {
+                        print(data)
                         completion(data)
                     }
                 }
             }
             task.resume()
-        }
-    }
-    
-    func parseJSON(_ newsData: Data) -> ArticleData? {
-        do {
-            let decodedData = try JSONDecoder().decode(ArticleData.self, from: newsData)
-            return decodedData
-        } catch {
-            print(error)
-            return nil
         }
     }
 }

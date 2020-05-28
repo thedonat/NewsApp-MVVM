@@ -8,12 +8,10 @@
 
 import Foundation
 
-struct ArticleData: Decodable {
+struct ArticleData: Codable {
     let articles: [Article]
 }
-struct Article: Decodable {
+struct Article: Codable {
     let title: String
     let description: String
 }
-
-
